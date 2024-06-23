@@ -1,0 +1,271 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color:#E9ECEF;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
+}
+
+.navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#5A189A;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+  
+.navbar img{
+    height:40px;
+    z-index:2;
+}
+.navbar #logo{
+    transform:translateX(-20px);
+    height:40px;
+    z-index:2;
+}
+
+.item1 { 
+    grid-area: image; 
+    height: 200px;   
+    border-radius: 1.5rem 1.5rem 0 0; 
+}
+.item1 > img{
+    height: 100%;
+    width : 100%;
+    object-fit : cover;
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.item2 {
+    grid-area: date; 
+    height: 70px;
+    margin-top:30px;
+    font-weight:600;
+}
+.item3 { 
+    grid-area: month; 
+    height: 78px;
+}
+.event .item4 { 
+    grid-area: description; 
+    height: 170px;
+    font-size: 15px;
+    padding-top:10px;
+    border-left: 1px solid #000; /* Adjust the color and width of the line */
+    text-align: left;
+    padding-left : 20px;
+    padding-right : 20px;
+}
+
+.event{
+    display : grid;
+    grid-template-rows: 200px 70px auto;
+    grid-template-columns : 120px 70px auto;
+    grid-template-areas:
+    'image image image image'
+    'date description description description'
+    'month description description description';
+    gap:2px;
+    width : 440px;
+    height : 375px;
+    background-color : #F8F9FA;
+    border-radius: 1.5rem;
+    box-shadow : 2px 2px 3px -1px rgba(0, 0, 0, 0.1);
+}
+.event > div {
+    text-align: center;
+    font-size: 30px;
+  }
+
+h1{
+    color: #5A189A;
+    display:flex;
+    justify-content: space-evenly;
+}
+sup{
+    font-size: 1rem;
+}
+
+.container{
+    display: flex;
+    justify-content : center;
+    align-content: flex-start;
+    flex-wrap : wrap;
+    margin : 35px 10px 10px 10px;
+    gap: 3rem;
+    
+}
+
+.register-button {
+    background-color: #7B2CBF; 
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    font-size: 16px; /* Font size of the text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Cursor style on hover */
+    margin-top:10px;
+}
+
+.register-button:hover {
+    background-color: #E0AAFF;
+}
+
+#confirm {
+    display:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.50);
+    z-index: 999999
+}
+#confirm .dialog {
+    width: 400px;
+    margin: 100px auto 0;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    border-radius: 3px;
+    overflow: hidden
+}
+#confirm .dialog .header {
+    padding: 10px 8px;
+    background-color: #f6f7f9;
+    border-bottom: 1px solid #e5e5e5
+}
+#confirm .dialog .header h3 {
+    font-size: 14px;
+    margin: 0;
+    color: #555;
+    display: inline-block
+}
+#confirm .dialog .header svg {
+    float: right;
+    color: #c4c5c7;
+    cursor: pointer;    
+    transition: all .5s ease;
+    padding: 0 2px;
+    border-radius: 1px    
+}
+#confirm .dialog .header svg:hover {
+    color: #b9b9b9
+}
+#confirm .dialog .header svg:active {
+    box-shadow: 0 0 5px #673AB7;
+    color: #a2a2a2
+}
+#confirm .dialog .msg {
+    padding: 12px 10px
+}
+#confirm .dialog .msg p{
+    margin: 0;
+    font-size: 15px;
+    color: #333
+}
+#confirm .dialog .footer {
+    border-top: 1px solid #e5e5e5;
+    padding: 8px 10px
+}
+#confirm .dialog .footer .controls {
+    direction: rtl
+}
+#confirm .dialog .footer .controls .button {
+    padding: 5px 15px;
+    border-radius: 3px
+}
+.button {
+  cursor: pointer
+}
+.button-default {
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgba(204, 204, 204, 0.5);
+    color: #5D5D5D;
+}
+.button-danger {
+    background-color: #f44336;
+    border: 1px solid #d32f2f;
+    color: #f5f5f5
+}
+
+.registered_event{
+    background-color:rgb(6, 170, 94) !important
+}
+ /* Dropdown Button */
+ .dropbtn {
+    width:50px;
+    height:50px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    border-radius : 50%;
+    border:solid 2px #F8F9FA;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  .dropbtn svg{
+    transform: translate(-3.5px, -4.5px);
+    pointer-events: none;
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    opacity: 0.8;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    float:right;
+    justify-content:right;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position:absolute;
+    transform: translate(-140px,10px);
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;} 
+  
+  @media screen and (max-width: 380px){
+    .navbar #logo{
+        transform:translateX(-10px);
+        height:30px;
+    }
+    .navbar img{
+        height:30px;
+    }
+    .event{
+        height : 390px;
+    }
+    .event .item4{
+        height: 185px;
+    }
+    
+  }

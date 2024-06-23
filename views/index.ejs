@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventEcho</title>
+    <link href=' http://fonts.googleapis.com/css?family=Poppins:200,600' rel='stylesheet' type='text/css'>
+    <link href='style.css' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/x-icon" href="/assets/logo.ico">
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var text = <%- JSON.stringify(registered) %>
+        window.onload = function(e){
+            load_events(text);
+        }
+    </script>
+    <script>
+        async function confirmRegister(e) {
+                
+
+                e.preventDefault();
+                
+                var formData = new FormData(e.target);
+                var eventId = formData.get('eventId');
+                for(let i=0; i<text.length; i++){
+                    if(JSON.stringify(text[i].event_id) == eventId){
+                        swal("You are already registered for this event!");
+                        return;
+                    }
+                }
+                const willRegister = await swal({
+                    title: "Are you sure?",
+                    text: "You want to register for this event?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+
+                if(willRegister) {
+                        swal("Registeration Successful!", {
+                        icon: "success",
+                    });
+                    e.target.submit();
+                }else{
+                        swal("Registration Cancelled.")
+                }
+            }
+</script>
+</head>
+<body>
+    <!-- <video autoplay muted loop id="myVideo">
+        <source src="bvicam.mp4" type="video/mp4" >
+    </video> -->
+
+    <div class="navbar">
+        <!-- Your navigation links or logo can go here -->
+        
+        <img src="./assets/BVICAM-Logo.png" alt="BVICAM">
+        <img id = "logo" src="./assets/eventechologowhite.png" alt="EventEcho">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn"><svg xmlns="http://www.w3.org/2000/svg" height="26" width="24" viewBox="0 0 448 512"><path fill="#F8F9FA" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg></button>
+            <div id="myDropdown" class="dropdown-content">
+            <% if(session.user!=null) { %>
+            <p style="text-align:left; margin-left:20px;">Welcome,</p>
+            <hr>
+           <a style="display:flex; gap:2rem; justify-content: left;" href="#"> <svg xmlns="http://www.w3.org/2000/svg" height="26" width="24" viewBox="0 0 448 512"><path fill="#000" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg><%= session.user %></a>
+            <a style="display:flex; gap:2rem; justify-content: left;" href="/logout"><svg  xmlns="http://www.w3.org/2000/svg" height="26" width="24" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"/></svg>Log Out</a>
+            <% } else {%>
+                <a href="/login">Log In</a>
+                <a href="/register">Register</a>
+            <% } %>
+            </div>
+        </div> 
+    </div>
+
+    
+    <h1>Upcoming Events</h1>
+    <hr width = 100px>
+    <div class="container">
+        <div class="event">
+            <div class="item1"><img src="./assets/event1.jpg"></div>
+            <div class="item2">09<sup>th</div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Dive into the code and challenge your skills! Join our coding competition and showcase your genius. #CodeFest2024
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="1" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="1"></form>
+            </div>
+        </div>
+        <div class="event">
+            <div class="item1"><img src="./assets/event2.jpg"></div>
+            <div class="item2">10<sup>th</div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Unleash your creativity in minutes! Participate in our short film competition and share your story. #Tech&MediaFest
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="2" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="2"></form>
+            </div>
+        </div>
+        <div class="event">
+            <div class="item1"><img src="./assets/event3.jpg"></div>
+            <div class="item2">11<sup>th</sup></div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Showcase your fandom expertise in our thrilling quiz competition. Think you know it all? Prove it! -----------------
+                
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="3" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="3"></form>
+            </div>
+        </div>
+        <div class="event">
+            <div class="item1"><img src="./assets/event4.jpg"></div>
+            <div class="item2">12<sup>th</div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Unleash your vocal prowess! Step onto the stage and shine in our exhilarating singing competition.
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="4" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="4"></form>
+            </div>
+        </div>
+        <div class="event">
+            <div class="item1"><img src="./assets/event5.jpg"></div>
+            <div class="item2">13<sup>th</div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Craft captivating web designs! Showcase your skills and innovation in our exciting website designing competition.
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="5" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="5"></form>
+            </div>
+        </div>
+        <div class="event">
+            <div class="item1"><img src="./assets/event6.jpg"></div>
+            <div class="item2">14<sup>th</div>
+            <div class="item3">Mar</div>  
+            <div class="item4">Capture the moment! Showcase your talent and vision in our captivating photography competition.
+            <form <% if(session.user!=null) { %> onsubmit = "return confirmRegister(event)" <% } %> action="/event" method="post"><button id="6" class="register-button">Register</button>
+                <input type="hidden" id="eventIdInput" name="eventId" value="6"></form>
+             </div>
+        </div>
+    </div>
+</body>
+</html>

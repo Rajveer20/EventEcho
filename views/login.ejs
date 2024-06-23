@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06aa5e">
+    <meta name="msapplication-navbutton-color" content="#06aa5e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>LogIn | EventEcho</title>
+    <link rel="icon" type="image/x-icon" href="/assets/logo.ico">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="card-container slideUp-animation">
+        <div class="image-container">
+            <img  src="./assets/eventechologo.png" alt="EventEcho">
+            <img src="./assets/BVICAM-Logo.png" class="illustration" alt="">
+        </div>
+        <form action="/login" method="post">
+            <div class="form-container Center-animation">
+    
+                <h1 class="form-header">
+                    Welcome Back!
+                </h1>
+                <div class="error">
+                    <% if(login_error.length > 0) { %>
+                    <%= login_error %>
+                    <% } %>
+                </div>
+                <div class="input-container">
+                    <label for="mail">
+                    </label>
+                    <input type="email" name="mail" id="mail" required>
+                    <span>
+                        E-mail
+                    </span>
+                </div>
+    
+    
+                <div class="input-container">
+                    <label for="user-password"></label>
+                    <input type="password" name="password" id="password" class="user-password" required>
+                    <span>Password</span>
+                </div>
+
+    
+
+                <div id="btm">
+                    <button type="submit" class="submit-btn">LogIn</button>
+                    <p class="btm-text">
+                        Don't have an account..? <span class="btm-text-highlighted"><a href="/register">   Create Account</a></span>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

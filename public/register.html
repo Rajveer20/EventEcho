@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#06aa5e">
+    <meta name="msapplication-navbutton-color" content="#06aa5e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sign up | EventEcho™</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="register.css">
+    <script src="register.js" defer></script>
+    <script src="../app.js" defer></script>
+</head>
+<body>
+    <main class="card-container slideUp-animation">
+        <div class="image-container">
+            <h1 class="company">EventEcho</h1>
+            <img style="width : 500px"src="BVICAM-Logo.png" class="illustration" alt="">
+        </div>
+        <form action="/register" method="post">
+            <div class="form-container slideRight-animation">
+    
+                <h1 class="form-header">
+                    Get started
+                </h1>
+    
+                <div class="input-container">
+                    <label for="fname"></label>
+                    <input type="text" name="fname" id="fname" required>
+                    <span>
+                        First name
+                    </span>
+                    <div class="error"></div>
+                </div>
+    
+                <div class="input-container">
+                    <label for="lname"></label>
+                    <input type="text" name="lname" id="lname" required>
+                    <span>
+                        Last name
+                    </span>
+                    <div class="error"></div>
+                </div>
+    
+                <div class="input-container">
+                    <label for="mail">
+                    </label>
+                    <input type="email" name="mail" id="mail" required>
+                    <span>
+                        E-mail
+                    </span>
+                    <div class="error"></div>
+                </div>
+    
+                <div class="input-container">
+                    <label for="phone">
+                    </label>
+                    <input type="tel" name="phone" id="phone" required>
+                    <span>Phone</span>
+                    <div class="error"></div>
+                </div>
+    
+                <div class="input-container">
+                    <label for="user-password"></label>
+                    <input type="password" name="password" id="password" class="user-password" required>
+                    <span>Password</span>
+                    <div class="error"></div>
+                </div>
+
+                <div class="input-container">
+                    <label for="user-password-confirm"></label>
+                    <input type="password" name="user-password-confirm" id="user-password-confirm" class="password-confirmation" required>
+                    <span>
+                        Confirm Password
+                    </span>
+                    <div class="error"></div>
+                </div>
+
+                <div id="btm">
+                    <button type="submit" class="submit-btn">Create Account</button>
+                    <p class="btm-text">
+                        Already have an account..? <span class="btm-text-highlighted">  Log in</span>
+                    </p>
+                </div>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
