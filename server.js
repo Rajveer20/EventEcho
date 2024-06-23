@@ -192,25 +192,13 @@ app.post('/register',(req,res)=>{
     var email = req.body.mail;
     var mobile = req.body.phone;
     var password = req.body.password;
-    var hashedPassword;
-    //encryption of password
-    bcrypt.genSalt(10,function(err, Salt){
-        bcrypt.hash(password, Salt, function(err,hash){
-            if(err)
-                return console.log('cannot encrypt');
-                console.log(hash);
-            hashedPassword = hash;
-            console.log(hashedPassword);
-
-        })
-    })
+    
     var confirm_password = req.body['user-password-confirm'];
     //Handling Password and Confirm Password do not match
     if(password != confirm_password){
         req.flash('pass_error', 'Passwords do not match');
         count++;
     }
-
 
     //Handling Duplicate Email Insertion
     var check = `SELECT * FROM users WHERE email = ? LIMIT 1`;
@@ -232,7 +220,16 @@ app.post('/register',(req,res)=>{
             res.redirect('/register');
         }
         else{
-            var query = `INSERT INTO users (fname,lname,email,mobile,password,verified) VALUES (?,?,?,?,?,?)`;
+            var hashedPassword;
+            //encryption of password
+            bcrypt.genSalt(10,function(err, Salt){
+                bcrypt.hash(password, Salt, function(err,hash){
+                    if(err)
+                        return console.log('cannot encrypt');
+
+                    hashedPassword = hash;
+                    console.log(hashedPassword);
+                    var query = `INSERT INTO users (fname,lname,email,mobile,password,verified) VALUES (?,?,?,?,?,?)`;
                     con.query(query,[fname,lname,email,mobile,hashedPassword,false], (err,data)=>{
                         if(err){
                             console.log(err);
@@ -250,7 +247,10 @@ app.post('/register',(req,res)=>{
                      let content = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Email Verification</title></head><body><div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #e0e0e0; max-width: 500px; margin: 20px auto;"><h2>Hello '+fname+'!</h2><p>Thank you for signing up. To continue, please verify your email address by clicking the button below:</p><a href="http://https://eventecho.onrender.com/verify/'+token+'"style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px; margin-top: 20px;">Verify Email</a><p>If the above button does not work, you can also click on the link below:</p><p><a href="http://localhost:3000/verify'+token+'">Click here to verify your email</a></p><p>This Verification Link will expire in 10 minutes.</p></div></body></html>';
                      sendMail(email,mailSubject,content);
 
-            res.redirect('/login');
+                     res.redirect('/login');
+
+                })
+            })
         }
     });
 });
